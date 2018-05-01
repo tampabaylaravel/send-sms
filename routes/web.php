@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::post('send-sms', 'SmsController@sendSms');
+Route::get('notify-sms', 'SmsController@notifySms');
