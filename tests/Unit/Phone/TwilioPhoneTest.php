@@ -7,14 +7,19 @@ use App\Phone\TwilioPhone;
 
 class TwilioPhoneTest extends TestCase
 {
+    use PhoneContractTests;
 
-    /** @test */
-    public function canSendSms()
+    protected function setUp()
     {
-        $phone = new TwilioPhone('ACe18a7b6751b6e576e2b1f31edcb2402b', '2817d2bbbdae7eb8ffb9a8e03a22cccb');
+        parent::setUp();
 
-        $messageId = $phone->sendSms('+13173953583', '+13176220305', 'This is a text message');
+        $config = config('services.twilio');
+        $this->config = $config;
 
-        $this->assertEquals('Sent from your Twilio trial account - This is a text message', $phone->getMessage($messageId)->message);
+        $this->phone = new TwilioPhone($config['account_sid'], $config['auth_token']);
+        $this->message = 'This is a text message';
+        $this->messageToAssert = 'Sent from your Twilio trial account - ' . $this->message;
+        $this->testTo = $config['test_to'];
+        $this->testFrom = $config['from'];
     }
 }

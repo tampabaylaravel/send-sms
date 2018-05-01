@@ -7,14 +7,16 @@ use App\Phone\FakePhone;
 
 class FakePhoneTest extends TestCase
 {
+    use PhoneContractTests;
 
-    /** @test */
-    public function canSendSms()
+    protected function setUp()
     {
-        $phone = new FakePhone;
+        parent::setUp();
 
-        $messageId = $phone->sendSms('5551234567', '5557654321', 'This is a text message');
-
-        $this->assertEquals('This is a text message', $phone->getMessage($messageId)->message);
+        $this->phone = new FakePhone;
+        $this->message = 'This is a text message';
+        $this->messageToAssert = $this->message;
+        $this->testTo = '+15551234567';
+        $this->testFrom = '+15557654321';
     }
 }

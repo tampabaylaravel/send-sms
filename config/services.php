@@ -35,4 +35,11 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'twilio' => [
+        'test_to' => env('TWILIO_TEST_TO_NUMBER'),
+        'from' => env('TWILIO_FROM_NUMBER'),
+        'account_sid' => env('TWILIO_ACCOUNT_SID'),
+        'auth_token' => env('TWILIO_AUTH_TOKEN'),
+    ]
+
 ];
